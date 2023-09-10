@@ -182,13 +182,14 @@ def test_dict():
 
 def test_add():
     a = Matrix(1, 3, 5, 7)
-    b = Matrix(2,4,6,8) 
+    b = Matrix(2, 4, 6, 8) 
     c = a + b
     print(c)
     print(a)
 
     a += b
     print(a)
+
 
 def test_with():
     # File 类中实现了 __enter__, 返回的值会赋值给 f

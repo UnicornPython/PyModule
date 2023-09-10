@@ -13,7 +13,9 @@ Python 中的列表推导式(可以用于元组与字典)
 
 num = [2, 19, 20, 79, 10, 20, 34, 2]
 
-dic = {"name": "alex", "gender": "false", "hobby": ["vallyball", "handwritter"]}
+dic = {
+    "name": "alex", "gender": "false", "hobby": ["vallyball", "handwritter"]
+}
 
 
 def mapping_data():
@@ -43,12 +45,17 @@ def dic_sort():
     scores = {
         "linlong": 10, "windows": 85, "Linux": 120, "MacOs": 90, "chromeOs": 50
     }
-    sored_scores = {item[0]: item[1] for item in sorted(scores.items(), key=lambda item: item[1], reverse=True)}
+    sored_scores = {
+        item[0]: item[1]
+        for item in sorted(scores.items(), key=lambda e: e[1], reverse=True)
+    }
     print(sored_scores)
 
 
 def set_earese_duplicate():
-    names = ['麦叔', '张三', ' 麦叔 ', 'FGA ', '张小三',  'FGA', '石石', ' 莫名', '莫名']
+    names = [
+        '麦叔', '张三', ' 麦叔 ', 'FGA ', '张小三',  'FGA', '石石', ' 莫名', '莫名'
+    ]
     true_name = {n.strip() for n in names}
     print(true_name)
     ...
