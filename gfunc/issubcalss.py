@@ -3,6 +3,7 @@
 判断类之间的继承关系
 """
 
+
 class Base:
     pass
 

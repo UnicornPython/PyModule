@@ -6,18 +6,16 @@
 
 """
 
-class Info:
 
+class Info:
     # 字段私有不对外开放
     def __init__(self, name):
         self.__name = name
-
 
     # 将方法转换为一个类的属性
     @property
     def alias(self):
         return self.__name
-
 
     # 为属性添加 setter 方法
     @alias.setter
@@ -55,7 +53,6 @@ class Pagination:
         self.page_count = page_count
         self.page_num = page_num
 
-
     @property
     def start(self):
         return (self.page_num - 1) * self.page_count
@@ -83,8 +80,8 @@ def main():
 
     ##################################
 
-    page = Pagination(10, 4, 2) 
-    data_list = [1,2,3,4,5,6,7,8,9,0]
+    page = Pagination(10, 4, 2)
+    data_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
     # 这里就是直接使用 start, end 属性实现了分页的功能
     result = data_list[page.start: page.end]
     print(result)

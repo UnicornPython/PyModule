@@ -1,7 +1,6 @@
 from xml.etree import ElementTree
 
 
-
 def parse_base():
     text = """
     <data>
@@ -24,7 +23,7 @@ def parse_base():
     """
 
     # 加载 xml
-    root =  ElementTree.XML(text)
+    root = ElementTree.XML(text)
 
     # 找到第一个
     node = root.find("country")
@@ -40,13 +39,11 @@ def parse_base():
     # 找到所有的标签
     node_list = root.findall("country")
     for node in node_list:
-        print(node.tag,node.attrib)
+        print(node.tag, node.attrib)
 
         # 继续遍历内部的标签节点
         for child in node:
             print(child.tag, child.text, child.attrib)
-
-
 
 
 def parse_demo():
@@ -69,7 +66,6 @@ def parse_demo():
     root = ElementTree.XML(text)
     for node in root:
         data[node.tag] = node.text
-
 
 
 def main():

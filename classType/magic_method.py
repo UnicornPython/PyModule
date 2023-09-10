@@ -27,11 +27,11 @@ __ifloordiv__()  : 对应算数运算(//=)决定了两个对象之间的取余�
 
 # 对象比较方法
 ################################################################
-__lt__() : 对应算数运行中 (<), 决定两个对象怎么比较大小 
-__tt__() : 对应算数运行中 (>), 决定两个对象怎么比较大小 
-__le__() : 对应算数运行中 (<=), 决定两个对象怎么比较大小 
-__ge__() : 对应算数运行中 (>=), 决定两个对象怎么比较大小 
-__eq__() : 对应算数运行中 (=), 决定两个对象怎么比较大小 
+__lt__() : 对应算数运行中 (<), 决定两个对象怎么比较大小
+__tt__() : 对应算数运行中 (>), 决定两个对象怎么比较大小
+__le__() : 对应算数运行中 (<=), 决定两个对象怎么比较大小
+__ge__() : 对应算数运行中 (>=), 决定两个对象怎么比较大小
+__eq__() : 对应算数运行中 (=), 决定两个对象怎么比较大小
 __ne__() : 对应算数运算中 (!=), 决定两个对象怎么比较大小
 
 
@@ -45,13 +45,13 @@ __delItem__() : 支持 del student['name']
 # 想要实现上下文功能
 ################################################################
 用于实现上下文功能，例如 with 语法,
-__enter__() : 用于实现上下文管理的功能, 进入上下文时调用 
+__enter__() : 用于实现上下文管理的功能, 进入上下文时调用
 __exit__()  : 用于实现上下文管理的功能，离开上下文时调用
 
 
 # 将对象升级为可执行
 ################################################################
-__call__() : 使得一个类创建的对象具有可执行性, 函数参数设计 
+__call__() : 使得一个类创建的对象具有可执行性, 函数参数设计
              既可以是一个函数，同时也可以是一个实现了这个方法
              的对象(鸭子类型)
 
@@ -77,7 +77,6 @@ class Config:
             print("singleton instance already exists")
         return cls.instance
 
-
     def __init__(self, log_path, verbose, other_settings):
         self.log_path = log_path
         self.verbose = verbose
@@ -93,6 +92,7 @@ class Config:
     def __repr__(self) -> str:
         return f'Config({self.log_path}, {self.verbose}, {self.other_settings})'
 
+
 class Matrix:
 
     def __init__(self, a, b, c, d):
@@ -101,9 +101,8 @@ class Matrix:
         self.c = c
         self.d = d
 
-
     def __add__(self, m2):
-        temp = Matrix(0,0,0,0)
+        temp = Matrix(0, 0, 0, 0)
         temp.a = self.a + m2.a
         temp.b = self.b + m2.b
         temp.c = self.c + m2.c
@@ -111,7 +110,7 @@ class Matrix:
         return temp
 
     def __iadd__(self, m2):
-        temp = Matrix(0,0,0,0)
+        temp = Matrix(0, 0, 0, 0)
         temp.a = self.a + m2.a
         temp.b = self.b + m2.b
         temp.c = self.c + m2.c
@@ -144,19 +143,18 @@ class File:
         if type(self.fd) is TextIOWrapper:
             self.fd.write(message)
 
-
     def read(self):
         if type(self.fd) is TextIOWrapper:
             self.fd.write("读消息\n")
 
 
-
 def test_del():
-    a = Config("./logs/", True, { "more_settings": "yes" })
+    a = Config("./logs/", True, {"more_settings": "yes"})
     b = a
     print("Delete a")
     del a 
     print(b)
+
 
 def test_singleton():
     a = Config("./logs/", True, {"more_settings": "yes"})
@@ -164,23 +162,26 @@ def test_singleton():
     print(a.log_path)
     print(a.verbose)
     print(a.other_settings)
-    b = Config("./data/", False,{"more_settings": "no"})
+    b = Config("./data/", False, {"more_settings": "no"})
     print("b -------------- object")
     print(b.log_path)
     print(b.verbose)
     print(b.other_settings)
 
+
 def test_str_repr():
-    b = Config("./data/", False,{"more_settings": "no"})
+    b = Config("./data/", False, {"more_settings": "no"})
     print(b)
     print(repr(b))
+
 
 def test_dict():
     config = Config("./data", "peek", "full")
     print(config.__dict__)
 
+
 def test_add():
-    a = Matrix(1,3,5,7)
+    a = Matrix(1, 3, 5, 7)
     b = Matrix(2,4,6,8) 
     c = a + b
     print(c)

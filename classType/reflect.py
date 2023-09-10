@@ -9,13 +9,12 @@ python 中的反射
 
 """
 import importlib
-import sys
+
 
 class Pilot:
 
-    def __init__(self, name = "alex"):
+    def __init__(self, name="alex"):
         self.name = name
-
 
     def find(self, name):
         return name
@@ -27,7 +26,7 @@ def reflect_method():
     # hasattr : 是否具有某个属性, 
     # getattr : 获取指定属性的值, 对应的是类中的 __getattribute__() 魔术方法
     # setattr : 为对象添加某个属性的值, 对应的是类中的 __setattr__() 魔术方法
-    pilot = Pilot();
+    pilot = Pilot()
     if hasattr(pilot, "ship"):
         print(getattr(pilot, "ship"))
     else:
@@ -38,10 +37,9 @@ def reflect_method():
 
     print(hasattr(pilot, "find"))
 
-
     # 获取方法执行
     if hasattr(pilot, "find"):
-        func = getattr(pilot, "find");
+        func = getattr(pilot, "find")
         result = func("hello")
         print(result)
 
@@ -65,17 +63,17 @@ def reflect_use_case():
 
     for path_str in PlatFormList:
         # 这里涉及到模块的导入，因此放到了外层 app.py 中测试了
-        module_path, func_name = path_str.rsplit(".", maxsplit=1) # 从右边查找第一个`.`切分
+        # 从右边查找第一个`.`切分
+        module_path, func_name = path_str.rsplit(".", maxsplit=1)
+
         md = importlib.import_module(module_path)
         func = getattr(md, func_name)
 
         func("CPU 干烧了")
 
 
-
 def main():
     reflect_method()
-
 
 
 if __name__ == "__main__":

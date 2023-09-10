@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 
 text = r"""
 Python 中类的继承关系
@@ -35,11 +36,11 @@ python2 和 python3 之间继承的差异
 
 """
 
+
 class BaseServer:
 
     def run_server(self):
-        self.handler();
-
+        self.handler()
 
     def handler(self):
         pass
@@ -49,7 +50,6 @@ class Server(BaseServer):
 
     def handler(self):
         self.process()
-        
 
     def process(self):
         print(123)
@@ -79,7 +79,7 @@ def main():
     #      process() 方法，找打则执行，
     #  > 6.输出 999
     obj = ThreadingServer()
-    obj.run_server() # 999
+    obj.run_server()  # 999
 
 
 if __name__ == "__main__":

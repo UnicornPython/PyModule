@@ -1,7 +1,5 @@
-import time 
-
+import time
 from datetime import datetime
-
 
 
 def format_time():
@@ -9,10 +7,8 @@ def format_time():
     print(ftime)
 
 
-
 def main():
     format_time()
-
 
 
 if __name__ == "__main__":

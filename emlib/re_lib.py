@@ -1,9 +1,7 @@
 import re
 
-
-
 document = r"""
-\d : 数字 
+\d : 数字
 \D : 非数字
 \w : 数字字母(下划线，中划线)
 \W : 非数字字母(下划线，中划线),没限定模式的时候包括汉字
@@ -15,7 +13,7 @@ document = r"""
 .  : 非换行符的任意字符
 *  : 表示匹配次数(0-n)
 ?  : 表示匹配次数(0-1)
-+  : 表示匹配次数(1-n) 
++  : 表示匹配次数(1-n)
 |  : 表示匹配的时候的或者关系
 ^  : 表示匹配边界的起始
 $  : 表示匹配边界的结束
@@ -28,10 +26,8 @@ $  : 表示匹配边界的结束
 """
 
 
-
 def findall():
-
-    text = "楼主太牛逼了，在想想要 s3435353535@qq.com 和 xxxx@live.com谢谢楼主,手机号也可12314234242,搞起来"
+    text = "楼主太牛逼了,想要 s3435353535@qq.com 和 xxxx@live.com谢谢,手机号也可12314234242,搞起"
     # 提起文本中的内容
     mobile = re.findall(r'\d{11}', text)
     print(mobile)
@@ -40,21 +36,19 @@ def findall():
     email = re.findall(r'\w+@\w+.\w+', text, re.ASCII)
     print(email)
 
-
     ####################################################
     # findall() : 当使用的表达式是原子表显示的，就只会获取原子表中的内容
     sufix = re.findall(r"\w+(@\w+.\w+)", text, re.ASCII)
     print(sufix)
 
-    identifyId = "身份证账号的长度是多少 351818199607081239, 那谁的身份证号是340806188901209187X阿里斯巴达"
+    identifyId = "账号的长度是多少 351818199607081239, 谁的身份证号是340806188901209187X阿里斯巴达"
     # 原子组提取的时候，出现多个原子组的时候，
     # 计算取出的原子组的值时 从左开始计算括号的位置来得到获取值的下表索引
     # 例如下面的示例中获取年份的提取下标应为 1(左起计算的排序为 2)
     res = re.findall(r"(\d{6}(\d{4})(\d{2})(\d{2})\d{3}[\dX])", identifyId)
-    print (res)
+    print(res)
     for item in res:
         print(item[1])
-
 
 
 def format_match():
@@ -70,7 +64,7 @@ def format_match():
     print(result)
     if result:
         print("格式合法")
-        print(result.group());
+        print(result.group())
     else:
         print("格式错误")
 
@@ -83,12 +77,12 @@ def search():
         > start() 方法获取匹配时在文本中的起始位置
         > end() 方法获取匹配内容在原始文本的结束位置
     """
-    identifyId = "身份证账号的长度是多少 351818199607081239, 那谁的身份证号是340806188901209187X阿里斯巴达"
+    identifyId = "身份证账号长度是多少 351818199607081239, 谁身份证号是340806188901209187X阿里斯巴"
     mathc_obj = re.search(r"\d{17}[\dX]", identifyId)
     if mathc_obj:
         print(mathc_obj.group())
-        print(mathc_obj.start());
-        print(mathc_obj.end());
+        print(mathc_obj.start())
+        print(mathc_obj.end())
     else:
         print("未找到匹配内容")
 
@@ -105,7 +99,6 @@ def main():
     format_match()
     search()
     split()
-
 
 
 if __name__ == "__main__":

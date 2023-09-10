@@ -1,22 +1,11 @@
-#!/usr/bin/env python 
-
+#!/usr/bin/env python
 
 """
-Python 中的生成器, 
+Python 中的生成器
 
 __itr__
 
 """
-
-
-
-
-
-
-
-
-
-
 
 
 def main():

@@ -10,13 +10,13 @@ callable()
 
 """
 
-class Foo:
 
+class Foo:
     def __call__(self, *args, **kwargs):
         pass
 
-class Bar:
 
+class Bar:
     pass
 
 
@@ -33,6 +33,6 @@ def main():
     bar = Bar()
     print(callable(bar))
 
+
 if __name__ == "__main__":
     main()
-
