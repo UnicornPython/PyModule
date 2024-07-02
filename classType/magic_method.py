@@ -152,7 +152,7 @@ def test_del():
     a = Config("./logs/", True, {"more_settings": "yes"})
     b = a
     print("Delete a")
-    del a 
+    del a
     print(b)
 
 

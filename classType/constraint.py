@@ -13,13 +13,13 @@ Python 中没有接口的概念, 怎样使用类之间的继承关系，
 
 class Message:
 
-    def execute(self, message):
+    def execute(self, message) -> None:
         raise Exception("这是必须要实现的发送消息的方法: ", f"execute({message})")
 
 
 class DingDing(Message):
 
-    def execute(self, message):
+    def execute(self, message) -> None:
         print(message)
         pass
 

@@ -47,7 +47,7 @@ class Point:
     x = property(getx, setx, delx)
 
 
-class Pagination: 
+class Pagination:
     def __init__(self, total, page_count, page_num):
         self.total = total
         self.page_count = page_count
@@ -56,7 +56,7 @@ class Pagination:
     @property
     def start(self):
         return (self.page_num - 1) * self.page_count
-    
+
     @property
     def end(self):
         return self.page_num * self.page_count
