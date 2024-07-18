@@ -70,9 +70,13 @@ class Config:
 
     instance = None
 
-    def __new__(cls, *args, **kwargs): 
-        if Config.instance is None:
-            cls.instance = super(Config, cls).__new__(cls)
+    def __new__(cls, *args, **kwargs):
+        if cls.instance is None:
+            # python 2.x 中
+            # cls.instance = super(Config, cls).__new__(cls)
+
+            # python 3.x 中 super() 函数
+            cls.instance = super().__new__(cls)
         else:
             print("singleton instance already exists")
         return cls.instance
@@ -129,7 +133,7 @@ class File:
         self.encoding = "utf-8"
         self.fd = None
 
-    def __enter__(self): 
+    def __enter__(self):
         self.fd = open(self.file_path, mode = self.mode, encoding=self.encoding)
         print("打开文件")
         return self
@@ -182,7 +186,7 @@ def test_dict():
 
 def test_add():
     a = Matrix(1, 3, 5, 7)
-    b = Matrix(2, 4, 6, 8) 
+    b = Matrix(2, 4, 6, 8)
     c = a + b
     print(c)
     print(a)
@@ -201,10 +205,10 @@ def test_with():
 def main():
     # test_del()
     # test_singleton()
-    # test_str_repr()
+    test_str_repr()
     # test_add()
     # test_dict()
-    test_with()
+    # test_with()
 
 
 if __name__ == "__main__":
