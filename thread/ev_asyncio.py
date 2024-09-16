@@ -10,7 +10,10 @@ from time import sleep
 """
 >>- ------------------------------------
    > 模仿事件循环机制驱动任务执行
-
+   1. event loop 负责创建和记录 task 
+   2. task : 需要执行的操作都是 task
+   3. corountine : 任务的持有对象
+   4. executor : 执行器
 >>-
 """
 
@@ -57,7 +60,7 @@ class Awaitable:
 
 
 task_id_iterator = itertools.count(1)
-
+loop = EventLoop()
 
 class Task:
     def __init__(self, coro):
