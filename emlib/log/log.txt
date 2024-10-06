@@ -1,0 +1,11 @@
+2024-10-06 08:33:50,292 - root - INFO - info
+2024-10-06 08:33:50,292 - root - WARNING - warning
+2024-10-06 08:33:50,292 - root - ERROR - error
+2024-10-06 08:33:50,292 - root - CRITICAL - critical
+2024-10-06 08:33:50,292 - pool - WARNING - This is custom logger, use logpool
+2024-10-06 08:33:50,292 - pool - ERROR - Get exception
+Traceback (most recent call last):
+  File "/home/unicorn/codelib/PyCode/emlib/log.py", line 40, in log_exception
+    1 / 0
+    ~~^~~
+ZeroDivisionError: division by zero

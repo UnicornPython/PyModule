@@ -71,7 +71,16 @@ async def async_play() -> None:
 
         # 简化为
 
-        await asyncio.sleep(1)
+        # await asyncio.sleep(1)
+
+        # 当可以阻塞函数没有异步版本的时候，可以使用多线程的技术来解决
+        # 这里会返回一个 coroutine, 这个任务实际上被交给了一个内置线程池来执行, 效果与协程类似，
+        # 
+        # 但是 python 中存在的 gil 锁，导致同一个时刻在执行的只能是一个线程
+        # 所以在大部分时候，python 程序使用多线程并不能提高程序的效率，还要考虑线程同步的问题
+        # 需要慎用
+        await asyncio.to_thread(time.sleep, 1)
+
         for _ in range(1000): # wang think, use CPU
             pass
 
@@ -97,9 +106,87 @@ def version2() -> None:
     asyncio.run(manager())
 
 
+
+"""
+##################################################################################################### 
+3. 其他的函数
+asyncio.Event() 构建时间通知的方式来控制异步任务的执行
+
+"""
+
+async def async_play_with_init(init_event) -> None:
+    # 等待初始化任务的完成之后才开始当前任务
+    # 事件的等待是异步操作，
+    await init_event.wait()
+    print("enter play")
+    for _ in range(5):
+       await asyncio.sleep(1)
+       for _ in range(1000): # wang think, use CPU
+            pass
+
+
+async def async_init()  -> None:
+    print("enter version3")
+    tasks = []
+    init_event = asyncio.Event()
+
+    for _ in range(10):
+        # 使用 create_task() 来提交一个 coroutinue
+        tasks.append(asyncio.create_task(async_play_with_init(init_event)))
+
+    await asyncio.sleep(1)
+    print("init Done")
+    # 事件的触发是同步执行的
+    init_event.set()
+    await asyncio.gather(*tasks)
+
+
+def version3() -> None: 
+    asyncio.run(async_init())
+
+"""
+#####################################################################################################
+4. asyncio 中的其他同步机制中的异步版本
+
+> ------ lock -----------
+lock = asyncio.Lock()
+await lock.acquire()
+try: 
+    ...
+finally:
+    lock.release()
+
+> ------Semaphore--------
+sem = asyncio.Semaphore(10)
+await sem..acquire()
+try:
+    ...
+finally:
+    sem.release()
+
+> ----- Barrier ---------
+barrier = asyncio.Barrier(2)
+await barrier.wait()
+
+barrier = asyncio.Barrier(2)
+async with barrier:
+    ....
+
+> -----condition---------
+cond = asyncio.Condition()
+await = cond.acquire()
+try:
+    await cond.wait()
+finally:
+    cond.release()
+
+"""
+
+
 def main() ->  None: 
     # version1()
-    version2()
+    # version2()
+    version3()
 
 if __name__ == "__main__":
     main()

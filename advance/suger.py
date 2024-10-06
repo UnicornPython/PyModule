@@ -1,7 +1,10 @@
-
 from random import random
 from itertools import count
 
+"""
+python 中的语法糖
+
+"""
 
 # 1 import
 def test_import():

@@ -1,7 +1,6 @@
 import inspect
 import re
 
-
 def getnumber(n: int):
     for i in range(n):
         # 函数在执行过程中，会又栈帧信息，

@@ -1,6 +1,5 @@
 from xml.etree import ElementTree
 
-
 def parse_base():
     text = """
     <data>
