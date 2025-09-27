@@ -1,6 +1,13 @@
 #!/python
-
+from pprint import pp
 import time 
+# asyncio 模块只实现了最基础的文件和网络底层的协程操作
+# 如果需要高层的 api 进行协程操作，需要额外的库
+import asyncio
+# 使用 aio 处理 http 请求的库
+import aiohttp
+# 使用 aio 处理文件的库
+import aiofiles
 
 """
 #####################################################################################################
@@ -56,10 +63,19 @@ def version1() -> None:
 
 """
 
-import asyncio
+
+async def fetch(url: str) -> str:
+    async with aiohttp.ClientSession() as session:
+        session.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.3987.149 Safari/537.36'
+        async with session.get(url) as response:
+            return await response.text()
+
+async def read_file(file_path: str) -> str:
+    async with aiofiles.open(file_path, "r") as f:
+        return await f.read()
 
 
-async def async_play() -> None: 
+async def async_play() -> str: 
     print("enter play")
     for _ in range(5):
         # time.sleep(1) # wait complete thinking
@@ -83,6 +99,7 @@ async def async_play() -> None:
 
         for _ in range(1000): # wang think, use CPU
             pass
+    return "done"
 
 async def manager() -> None:
     print("enter main")
@@ -93,19 +110,37 @@ async def manager() -> None:
         tasks.append(asyncio.create_task(async_play()))
 
     # 这里不必关心 await 的是哪一个，因为所有的都在执行
-    # 只是阻塞等待结果, 所有任务执行的总时间一定是最长世间的那一个的耗时
+    # 只是阻塞等待结果, 所有任务执行的总时间一定是最长时间的那一个的耗时相同
     # for t in tasks:
     #     await t
     # 可简化为如下，返回值为参数中所有 coroutine 的返回值组成的列表
     await asyncio.gather(*tasks)
 
+    # api:  as_complated() 
+    # 也可以使用这个 API 来等待所有的任务完成
+    # 但是这个函数的返回值是一个 generator, 有协程完成任务
+    # 就会返回, 并不会等待所有任务完成才返回.
+
+    result = asyncio.as_completed([
+        fetch("https://jsonplaceholder.org/users/1"),
+        read_file("./temp/aio_test.txt")
+    ]);
+    # 这时候可以边等待边执行, 迭代处理返回的结果
+    for t in result:
+        pp(await t)
+
     print(f"total time: {time.time() - start} seconds")
+
+
+async def version_wait() : 
+    task = asyncio.create_task(async_play())
+    result = await asyncio.wait_for(task, timeout=10)
+    print(result)
 
 
 def version2() -> None:
     asyncio.run(manager())
-
-
+    # asyncio.run(version_wait())
 
 """
 ##################################################################################################### 
@@ -185,8 +220,8 @@ finally:
 
 def main() ->  None: 
     # version1()
-    # version2()
-    version3()
+    version2()
+    # version3()
 
 
 if __name__ == "__main__":

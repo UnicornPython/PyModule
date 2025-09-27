@@ -1,13 +1,18 @@
 #!/python
 
 from enum import Enum, Flag, auto
-
+# 指定 Enum value 的类型, 
+from enum import IntEnum, StrEnum
 
 class Color(Enum):
     RED = "R"
     GREEN = "G"
     BLUE = "B"
 
+    @classmethod
+    def show(cls):
+        for color in Color:
+            print(color.name, color.value)
 
 def create_car(color: Color) -> None:
     match color:
@@ -20,8 +25,11 @@ def create_car(color: Color) -> None:
         case _:
             print(f" we do not have the color {color} in our database")
 
+def show_enum_items():
+    Color.show()
 
 def base() -> None:
+    show_enum_items()
     print(Color.BLUE)
     print(Color("B"))
     print(Color.GREEN)

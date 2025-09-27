@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 
 
+from collections import namedtuple
+from typing import NamedTuple
+
+
 def turple():
     """元组"""
 
@@ -27,8 +31,44 @@ def turple():
     print(type(t4))
 
 
+
+##########################################################
+# 命名元组
+##########################################################
+# > 具备了元组的不可变性和字典的可读性
+# 
+# collections 中提供了 namedtuple, 但是这种使用方式会丢失类型信息
+# typing 中提供了 namedTuple, 可以保留类型信息
+
+class Point(NamedTuple):
+    x: float
+    y: float
+
+
+def nameturple():
+    """命名元组"""
+
+
+    # 1.collections 中的命令元组使用方式
+    Point = namedtuple("Point", ['x', 'y'])
+    px = Point(1, 2)
+    print(px.x)
+    print(px[1])
+
+
+    # 2. typing 中的命名元组可以保留类型信息
+    p = Point(1.2, 2.0)
+    # 支持多种方式的访问
+    print(p.x)
+    print(p[0])
+
+
+
+
+
 def main():
     turple()
+    nameturple()
 
 
 if __name__ == "__main__":

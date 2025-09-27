@@ -1,0 +1,66 @@
+
+# 注释用 #
+# 支持灵活的数据类型
+
+# 1.基本数据类型
+name = 'unicorn' # 字符串可以是单引号或者双引号
+age = 18
+# 如果需要在字符串中使用转义字符, 则必须使用双引号
+gende = "\"male\""
+
+# 2. 复杂数据类型
+
+# 2.1 列表
+hobbies = ["reading", "writting", "coding"]
+# 时间
+birthdate = 1996-07-01T00:00:00Z
+
+# 2.2 table (toml 中类型, 对应字典)
+
+# 简单表
+shape = { height = 1.88, weight = 75.0 }
+
+
+# 展开表的一层, 使用中括号来展开表,内部可以是表中任意的键
+# 这就意味着可以展开多层嵌套的表
+# [account]
+# bilibili = "ancion"
+# youtube = "unicorn"
+
+# 再次嵌套一层
+# [account]
+# bilibili.name = "ancion"
+# bilibili.password = "123456"
+# youtbe.name = "unicorn"
+# youtbe.password = "123456"
+
+# 为了更加清晰，可以将不同层级之间合并分块
+# 这三种表示的都是同一种含义
+
+[account.bilibili]
+name = "ancion"
+password = "123456"
+
+[account.youtbe]
+name = "unicorn"
+password = "123456"
+
+# 2.3.包含字典的列表
+
+# 可以使用双中括号来表示列表中的字典
+[[platform]]
+name = "github"
+url = "https://github.com"
+
+[[platform]]
+name = "twitter"
+url = "https://twitter.com"
+
+
+# 注意, 这样的写法只能存在于顶层之中，如果前面出现了
+# 其他的表，这会将这个作为该表的一部分
+# platform = [
+#   { name = "bilibili", url = "https://bilibili.com" },
+#   { name = "youtube", url = "https://youtube.com" },
+# ]
+

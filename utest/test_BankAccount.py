@@ -1,6 +1,13 @@
 
 # python 标准库中提供了单元测试的框架 unittest
 
+# python -m unittest discover
+# 
+# 可以发现所有以 test 开头的文件都是测试文件,
+# 所有以 test 开头的函数都是测试函数
+
+
+
 import unittest
 from unittest.mock import patch
 from bank_account import BankAccount
